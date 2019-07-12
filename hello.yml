@@ -1,5 +1,0 @@
-- hosts: all
-  tasks:
-  - name: say hello
-    #debug: var=ansible_hostname
-    debug: var=kafka.broker.id
