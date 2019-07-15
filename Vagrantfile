@@ -8,7 +8,7 @@ Vagrant.configure("2") do |config|
       vb.cpus = 2
     end
 
-    #broker1.vm.hostname = "broker1"
+    broker1.vm.hostname = "broker1"
     broker1.vm.network "private_network", ip: "192.168.10.21"
 
     broker1.vm.network "forwarded_port", guest: 22, host: 2231
@@ -35,7 +35,7 @@ Vagrant.configure("2") do |config|
       vb.cpus = 2
     end
 
-    #broker2.vm.hostname = "broker2"
+    broker2.vm.hostname = "broker2"
     broker2.vm.network "private_network", ip: "192.168.10.22"
 
     broker2.vm.network "forwarded_port", guest: 22, host: 2232
@@ -62,7 +62,7 @@ Vagrant.configure("2") do |config|
       vb.cpus = 2
     end
 
-    #broker3.vm.hostname = "broker3"
+    broker3.vm.hostname = "broker3"
     broker3.vm.network "private_network", ip: "192.168.10.23"
 
     broker3.vm.network "forwarded_port", guest: 22, host: 2233
