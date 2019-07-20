@@ -7,8 +7,14 @@ all:
 preflight:
   hosts:
     node1:
+      ansible_ssh_host: 127.0.0.1
+      ansible_ssh_port: 2231
     node2:
+      ansible_ssh_host: 127.0.0.1
+      ansible_ssh_port: 2232
     node3:
+      ansible_ssh_host: 127.0.0.1
+      ansible_ssh_port: 2233
 ssl_CA:
   hosts:
     node1:
