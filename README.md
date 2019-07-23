@@ -1,12 +1,12 @@
 ## vagrant up will create the vms, as well as generate an inventory file
 vagrant up
 
-## inventory file found at this path
+## run the ansible install
 cd /path/to/cp-ansible-internal
 
-ansible-playbook -i ../vagrant-confluent/hosts.yml all.yml
+ansible-playbook -i ../vagrant-confluent/local-hosts.yml all.yml
 
-ansible -i ../vagrant-confluent/hosts.yml all -m shell -a "systemctl --failed"
+ansible -i ../vagrant-confluent/local-hosts.yml all -m shell -a "systemctl --all | grep confluent"
 
 ## SSH into node 1,2,3
 ssh vagrant@127.0.0.1 -o StrictHostKeyChecking=no -o IdentitiesOnly=yes -p 2231

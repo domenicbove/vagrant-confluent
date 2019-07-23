@@ -3,7 +3,7 @@ all:
     ansible_ssh_common_args: -o StrictHostKeyChecking=no -o IdentitiesOnly=yes
     ansible_become: true
     ansible_user: vagrant
-    security_mode: ssl
+    security_mode: sasl_ssl
 preflight:
   hosts:
     node1:
@@ -56,4 +56,4 @@ kafka-rest:
     node1:
 ksql:
   hosts:
-    node1:
+    node3:
