@@ -1,6 +1,8 @@
 ## vagrant up will create the vms, as well as generate an inventory file
 vagrant up
 
+vagrant plugin install vagrant-vbguest
+
 ## run the ansible install
 cd /path/to/cp-ansible-internal
 
