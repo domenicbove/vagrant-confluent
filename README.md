@@ -1,7 +1,17 @@
+## install virtualbox
+brew cask install virtualbox
+
+## under system preferences allow the install
+https://stackoverflow.com/questions/46546192/virtualbox-not-installing-on-high-sierra
+
+## install vagrant
+brew cask install vagrant
+
+## install vbguest plugin to enable mounting to debian based images
+vagrant plugin install vagrant-vbguest
+
 ## vagrant up will create the vms, as well as generate an inventory file
 vagrant up
-
-vagrant plugin install vagrant-vbguest
 
 ## run the ansible install
 cd /path/to/cp-ansible-internal
@@ -14,7 +24,3 @@ ansible -i ../vagrant-confluent/local-hosts.yml all -m shell -a "systemctl --all
 ssh vagrant@127.0.0.1 -o StrictHostKeyChecking=no -o IdentitiesOnly=yes -p 2231
 ssh vagrant@127.0.0.1 -o StrictHostKeyChecking=no -o IdentitiesOnly=yes -p 2232
 ssh vagrant@127.0.0.1 -o StrictHostKeyChecking=no -o IdentitiesOnly=yes -p 2233
-
-## SSH into the jumphost, which can ssh to all
-ssh vagrant@127.0.0.1 -o StrictHostKeyChecking=no -o IdentitiesOnly=yes -p 2230
-ssh vagrant@node1
