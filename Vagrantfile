@@ -1,8 +1,10 @@
-BOX_BASE1 = "bento/debian-8"
+#BOX_BASE1 = "bento/debian-8"
 #BOX_BASE2 = "generic/debian8"
-BOX_BASE3 = "debian/jessie64"
-#BOX_BASE = "centos/7"
-BOX_BASE2 = "bento/ubuntu-16.04"
+BOX_BASE1 = "generic/rhel7"
+#BOX_BASE3 = "debian/jessie64"
+BOX_BASE2 = "roboxes/rhel7"
+BOX_BASE3 = "centos/7"
+#BOX_BASE2 = "bento/ubuntu-16.04"
 
 Vagrant.configure("2") do |config|
 
