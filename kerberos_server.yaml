@@ -1,0 +1,52 @@
+---
+- hosts: kerberos-server
+  roles:
+   - kerberos_server
+
+- hosts: kerberos-server
+  tasks:
+  - name: keytabs dir
+    file:
+      path: /tmp/keytabs/
+      state: directory
+      mode: 0755
+
+- hosts: kerberos
+  tasks:
+
+   - name: addprinc
+     shell: "kadmin.local -q 'addprinc -randkey {{ item }}/{{ inventory_hostname }}@{{ realm | upper }}'"
+     delegate_to: "{{ groups['kerberos-server'][0] }}"
+     with_items:
+       - kafka
+       - zookeeper
+       - cp-zk
+       - schemaregistry
+       - restproxy
+       - cp-connect
+       - controlcenter
+       - client
+
+   - name: Create kafka keytab
+     shell: "kadmin.local -q 'xst -norandkey -k /tmp/keytabs/{{ inventory_hostname }}.keytab kafka/{{ inventory_hostname }}@{{ realm | upper }}'"
+     delegate_to: "{{ groups['kerberos-server'][0] }}"
+
+   - name: Create rest of the keytabs
+     shell: "kadmin.local -q 'xst -norandkey -k /tmp/keytabs/{{ item }}-{{ inventory_hostname }}.keytab {{ item }}/{{ inventory_hostname }}@{{ realm | upper }}'"
+     delegate_to: "{{ groups['kerberos-server'][0] }}"
+     with_items:
+       - zookeeper
+       - cp-zk
+       - schemaregistry
+       - restproxy
+       - cp-connect
+       - controlcenter
+       - client
+
+- hosts: kerberos-server
+  tasks:
+  - name: copy keytabs back
+    synchronize:
+      src: /tmp/keytabs/
+      dest: keytabs
+      mode: pull
