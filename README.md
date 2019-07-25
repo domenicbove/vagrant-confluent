@@ -23,8 +23,11 @@ BOX_BASE4 = "centos/7"
 #BOX_BASE2 = "bento/ubuntu-16.04"
 ```
 
-## vagrant up will create the vms, as well as generate an inventory file
+## vagrant up will create 4 vms
 vagrant up
+
+## if you do not need kerberos, which is on node4
+vagrant up node1 node2 node3
 
 ## to start kerberos server and pull down keytabs run
 ansible-playbook -i inventories/kerberos.yml kerberos_server.yml
