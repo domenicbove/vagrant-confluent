@@ -1,6 +1,5 @@
 #BOX_BASE1 = "bento/debian-8"
 #BOX_BASE2 = "generic/debian8"
-#BOX_BASE1 = "generic/rhel7"
 #BOX_BASE3 = "debian/jessie64"
 #BOX_BASE2 = "roboxes/rhel7"
 BOX_BASE1 = "centos/7"

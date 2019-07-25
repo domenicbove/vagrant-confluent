@@ -3,11 +3,7 @@ all:
     ansible_ssh_common_args: -o StrictHostKeyChecking=no -o IdentitiesOnly=yes
     ansible_become: true
     ansible_user: vagrant
-    security_mode: kerberos
-    realm: domenic.example.com
-    kdc_hostname: node4
-    admin_hostname: node4
-    keytab_source_dir: /Users/dbove/workspace/vagrant-confluent/keytabs/
+    security_mode: plaintext
 preflight:
   hosts:
     node1:
@@ -19,14 +15,6 @@ preflight:
     node3:
       ansible_ssh_host: 127.0.0.1
       ansible_ssh_port: 2233
-ssl_CA:
-  hosts:
-    node1:
-kerberos:
-  hosts:
-    node1:
-    node2:
-    node3:
 zookeeper:
   hosts:
     node1:
@@ -66,9 +54,3 @@ kafka-rest:
 ksql:
   hosts:
     node3:
-kerberos-server:
-  hosts:
-    node4:
-      ansible_ssh_host: 127.0.0.1
-      ansible_ssh_port: 2234
-      realm_name: "{{ realm | upper }}"
