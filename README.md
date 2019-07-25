@@ -7,10 +7,10 @@ https://stackoverflow.com/questions/46546192/virtualbox-not-installing-on-high-s
 ## install vagrant
 brew cask install vagrant
 
-## only needed for debian 8, skip if otherwise
+## install vbguest vagrant plugin, only needed for debian 8, skip if otherwise
 vagrant plugin install vagrant-vbguest
 
-## open Vagrantfile and comment in which oc you would like to use for each vm (rhel7 is missing repos)
+## open Vagrantfile and comment in which OS you would like to use for each vm (rhel7 is missing repos)
 ```
 #BOX_BASE1 = "bento/debian-8"
 #BOX_BASE2 = "generic/debian8"
@@ -34,7 +34,11 @@ cd /path/to/cp-ansible
 
 ansible-playbook -i ../vagrant-confluent/inventories/<security_type>.yml all.yml
 
+## check services
 ansible -i ../vagrant-confluent/inventories/<security_type>.yml preflight -m shell -a "systemctl --all | grep confluent"
+
+## view control center
+go to http://localhost:9021 or https://localhost:9021 in browser
 
 ## SSH into node 1,2,3,4
 ssh vagrant@127.0.0.1 -o StrictHostKeyChecking=no -o IdentitiesOnly=yes -p 2231
@@ -55,3 +59,9 @@ sshv3() {
 sshv4() {
   ssh vagrant@127.0.0.1 -o StrictHostKeyChecking=no -o IdentitiesOnly=yes -p 2234
 }
+
+## clean up a node
+vagrant destroy node4 -f
+
+## destroy everything
+vagrant destroy -f
