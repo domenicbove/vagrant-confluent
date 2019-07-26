@@ -17,7 +17,7 @@ Vagrant.configure("2") do |config|
       vb.cpus = 2
     end
 
-    node1.vm.hostname = "node1"
+    node1.vm.hostname = "node1.example.com"
     node1.vm.network "private_network", ip: "192.168.10.21"
 
     node1.vm.network "forwarded_port", guest: 22, host: 2231
@@ -27,11 +27,11 @@ Vagrant.configure("2") do |config|
       ## insert public key for easy ssh
       ssh_pub_key = File.readlines("#{Dir.home}/.ssh/id_rsa.pub").first.strip
       s.inline = <<-SHELL
-        sed -i '/node1/d' /etc/hosts
-        echo '192.168.10.21 node1' >> /etc/hosts
-        echo '192.168.10.22 node2' >> /etc/hosts
-        echo '192.168.10.23 node3' >> /etc/hosts
-        echo '192.168.10.24 node4' >> /etc/hosts
+        sed -i '/node1.example.com/d' /etc/hosts
+        echo '192.168.10.21 node1.example.com' >> /etc/hosts
+        echo '192.168.10.22 node2.example.com' >> /etc/hosts
+        echo '192.168.10.23 node3.example.com' >> /etc/hosts
+        echo '192.168.10.24 node4.example.com' >> /etc/hosts
         echo #{ssh_pub_key} >> /home/vagrant/.ssh/authorized_keys
         touch /etc/sysconfig/network
         sudo systemctl restart network
@@ -46,7 +46,7 @@ Vagrant.configure("2") do |config|
       vb.cpus = 2
     end
 
-    node2.vm.hostname = "node2"
+    node2.vm.hostname = "node2.example.com"
     node2.vm.network "private_network", ip: "192.168.10.22"
 
     ## Run control center
@@ -59,11 +59,11 @@ Vagrant.configure("2") do |config|
       ## insert public key for easy ssh
       ssh_pub_key = File.readlines("#{Dir.home}/.ssh/id_rsa.pub").first.strip
       s.inline = <<-SHELL
-        sed -i '/node2/d' /etc/hosts
-        echo '192.168.10.21 node1' >> /etc/hosts
-        echo '192.168.10.22 node2' >> /etc/hosts
-        echo '192.168.10.23 node3' >> /etc/hosts
-        echo '192.168.10.24 node4' >> /etc/hosts
+        sed -i '/node2.example.com/d' /etc/hosts
+        echo '192.168.10.21 node1.example.com' >> /etc/hosts
+        echo '192.168.10.22 node2.example.com' >> /etc/hosts
+        echo '192.168.10.23 node3.example.com' >> /etc/hosts
+        echo '192.168.10.24 node4.example.com' >> /etc/hosts
         echo #{ssh_pub_key} >> /home/vagrant/.ssh/authorized_keys
         touch /etc/sysconfig/network
         sudo systemctl restart network
@@ -78,7 +78,7 @@ Vagrant.configure("2") do |config|
       vb.cpus = 2
     end
 
-    node3.vm.hostname = "node3"
+    node3.vm.hostname = "node3.example.com"
     node3.vm.network "private_network", ip: "192.168.10.23"
 
     ## Run ksql
@@ -91,11 +91,11 @@ Vagrant.configure("2") do |config|
       ## insert public key for easy ssh
       ssh_pub_key = File.readlines("#{Dir.home}/.ssh/id_rsa.pub").first.strip
       s.inline = <<-SHELL
-        sed -i '/node3/d' /etc/hosts
-        echo '192.168.10.21 node1' >> /etc/hosts
-        echo '192.168.10.22 node2' >> /etc/hosts
-        echo '192.168.10.23 node3' >> /etc/hosts
-        echo '192.168.10.24 node4' >> /etc/hosts
+        sed -i '/node3.example.com/d' /etc/hosts
+        echo '192.168.10.21 node1.example.com' >> /etc/hosts
+        echo '192.168.10.22 node2.example.com' >> /etc/hosts
+        echo '192.168.10.23 node3.example.com' >> /etc/hosts
+        echo '192.168.10.24 node4.example.com' >> /etc/hosts
         echo #{ssh_pub_key} >> /home/vagrant/.ssh/authorized_keys
         touch /etc/sysconfig/network
         sudo systemctl restart network
@@ -110,7 +110,7 @@ Vagrant.configure("2") do |config|
       vb.cpus = 2
     end
 
-    node4.vm.hostname = "node4"
+    node4.vm.hostname = "node4.example.com"
     node4.vm.network "private_network", ip: "192.168.10.24"
 
     node4.vm.network "forwarded_port", guest: 22, host: 2234
@@ -121,10 +121,10 @@ Vagrant.configure("2") do |config|
       ssh_pub_key = File.readlines("#{Dir.home}/.ssh/id_rsa.pub").first.strip
       s.inline = <<-SHELL
         sed -i '/node4/d' /etc/hosts
-        echo '192.168.10.21 node1' >> /etc/hosts
-        echo '192.168.10.22 node2' >> /etc/hosts
-        echo '192.168.10.23 node3' >> /etc/hosts
-        echo '192.168.10.24 node4' >> /etc/hosts
+        echo '192.168.10.21 node1.example.com' >> /etc/hosts
+        echo '192.168.10.22 node2.example.com' >> /etc/hosts
+        echo '192.168.10.23 node3.example.com' >> /etc/hosts
+        echo '192.168.10.24 node4.example.com' >> /etc/hosts
         echo #{ssh_pub_key} >> /home/vagrant/.ssh/authorized_keys
         touch /etc/sysconfig/network
         sudo systemctl restart network
