@@ -4,7 +4,21 @@ all:
     ansible_become: true
     ansible_user: vagrant
     security_mode: ssl
-preflight:
+# preflight:
+#   hosts:
+#     node1.example.com:
+#       # ansible_ssh_host: 127.0.0.1
+#       # ansible_ssh_port: 2231
+#     node2.example.com:
+#       ansible_ssh_host: 127.0.0.1
+#       ansible_ssh_port: 2232
+#     node3.example.com:
+#       ansible_ssh_host: 127.0.0.1
+#       ansible_ssh_port: 2233
+# ssl_CA:
+#   hosts:
+#     node1.example.com:
+zookeeper:
   hosts:
     node1.example.com:
       ansible_ssh_host: 127.0.0.1
@@ -15,14 +29,6 @@ preflight:
     node3.example.com:
       ansible_ssh_host: 127.0.0.1
       ansible_ssh_port: 2233
-ssl_CA:
-  hosts:
-    node1.example.com:
-zookeeper:
-  hosts:
-    node1.example.com:
-    node2.example.com:
-    node3.example.com:
 broker:
   hosts:
     node1.example.com:

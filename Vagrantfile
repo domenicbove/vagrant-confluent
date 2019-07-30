@@ -106,8 +106,8 @@ Vagrant.configure("2") do |config|
   config.vm.define "node4" do |node4|
     node4.vm.box = BOX_BASE4
     node4.vm.provider "virtualbox" do |vb|
-      vb.memory = 2048
-      vb.cpus = 2
+      vb.memory = 1024
+      vb.cpus = 1
     end
 
     node4.vm.hostname = "node4.example.com"

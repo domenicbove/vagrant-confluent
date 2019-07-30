@@ -1,9 +1,9 @@
 ---
-- hosts: kerberos-server
+- hosts: kerberos_server
   roles:
    - kerberos_server
 
-- hosts: kerberos-server
+- hosts: kerberos_server
   tasks:
   - name: keytabs dir
     file:
@@ -11,12 +11,12 @@
       state: directory
       mode: 0755
 
-- hosts: kerberos
+- hosts: zookeeper:kafka:schema_registry:kafka_connect:ksql:control_center:kafka_rest
   tasks:
 
    - name: addprinc
-     shell: "kadmin.local -q 'addprinc -randkey {{ item }}/{{ inventory_hostname }}@{{ realm | upper }}'"
-     delegate_to: "{{ groups['kerberos-server'][0] }}"
+     shell: "kadmin.local -q 'addprinc -randkey {{ item }}/{{ inventory_hostname }}@{{ kerberos.realm | upper }}'"
+     delegate_to: "{{ groups['kerberos_server'][0] }}"
      with_items:
        - kafka
        - zookeeper
@@ -28,12 +28,12 @@
        - client
 
    - name: Create kafka keytab
-     shell: "kadmin.local -q 'xst -norandkey -k /tmp/keytabs/{{ inventory_hostname }}.keytab kafka/{{ inventory_hostname }}@{{ realm | upper }}'"
-     delegate_to: "{{ groups['kerberos-server'][0] }}"
+     shell: "kadmin.local -q 'xst -norandkey -k /tmp/keytabs/{{ inventory_hostname }}.keytab kafka/{{ inventory_hostname }}@{{ kerberos.realm | upper }}'"
+     delegate_to: "{{ groups['kerberos_server'][0] }}"
 
    - name: Create rest of the keytabs
-     shell: "kadmin.local -q 'xst -norandkey -k /tmp/keytabs/{{ item }}-{{ inventory_hostname }}.keytab {{ item }}/{{ inventory_hostname }}@{{ realm | upper }}'"
-     delegate_to: "{{ groups['kerberos-server'][0] }}"
+     shell: "kadmin.local -q 'xst -norandkey -k /tmp/keytabs/{{ item }}-{{ inventory_hostname }}.keytab {{ item }}/{{ inventory_hostname }}@{{ kerberos.realm | upper }}'"
+     delegate_to: "{{ groups['kerberos_server'][0] }}"
      with_items:
        - zookeeper
        - cp-zk
@@ -43,7 +43,7 @@
        - controlcenter
        - client
 
-- hosts: kerberos-server
+- hosts: kerberos_server
   tasks:
   - name: copy keytabs back
     synchronize:
