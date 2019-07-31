@@ -23,7 +23,7 @@ zookeeper:
     node3.example.com:
       ansible_ssh_host: 127.0.0.1
       ansible_ssh_port: 2233
-kafka:
+kafka_broker:
   hosts:
     node1.example.com:
       broker_id: 1
@@ -37,11 +37,9 @@ schema_registry:
 control_center:
   hosts:
     node2.example.com:
-      confluent:
-        control:
-          center:
-            config:
-              confluent.controlcenter.connect.cluster: node1.example.com:8083
+      control_center:
+        properties:
+          confluent.controlcenter.connect.cluster: node1.example.com:8083
 kafka_connect:
   hosts:
     node1.example.com:
