@@ -29,6 +29,12 @@ vagrant up
 ## if you do not need kerberos, which is on node4
 vagrant up node1 node2 node3
 
+## open hosts.yml and fix the keytab_source_dir variable
+```
+kerberos:
+  keytab_source_dir: /path/to/vagrant-confluent/keytabs/
+```
+
 ## to start kerberos server and pull down keytabs run
 ansible-playbook -i inventories/kerberos.yml kerberos_server.yml
 
