@@ -10,6 +10,14 @@ BOX_BASE4 = "centos/7"
 
 Vagrant.configure("2") do |config|
 
+  # Speed up networking
+  config.vm.provider "virtualbox" do |v|
+    v.customize ["modifyvm", :id, "--nictype1", "virtio" ]
+    v.customize ["modifyvm", :id, "--nictype2", "virtio" ]
+    v.customize ["modifyvm", :id, "--natdnshostresolver4", "on"]
+    v.customize ["modifyvm", :id, "--natdnsproxy4", "on"]
+  end
+
   config.vm.define "node1" do |node1|
     node1.vm.box = BOX_BASE1
     node1.vm.provider "virtualbox" do |vb|
@@ -33,8 +41,8 @@ Vagrant.configure("2") do |config|
         echo '192.168.10.23 node3.example.com' >> /etc/hosts
         echo '192.168.10.24 node4.example.com' >> /etc/hosts
         echo #{ssh_pub_key} >> /home/vagrant/.ssh/authorized_keys
-        touch /etc/sysconfig/network
-        sudo systemctl restart network
+        # touch /etc/sysconfig/network
+        # sudo systemctl restart network
       SHELL
     end
   end
@@ -65,8 +73,8 @@ Vagrant.configure("2") do |config|
         echo '192.168.10.23 node3.example.com' >> /etc/hosts
         echo '192.168.10.24 node4.example.com' >> /etc/hosts
         echo #{ssh_pub_key} >> /home/vagrant/.ssh/authorized_keys
-        touch /etc/sysconfig/network
-        sudo systemctl restart network
+        # touch /etc/sysconfig/network
+        # sudo systemctl restart network
       SHELL
     end
   end
