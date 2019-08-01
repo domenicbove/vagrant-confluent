@@ -36,7 +36,7 @@ kerberos:
 ```
 
 ## to start kerberos server and pull down keytabs run
-ansible-playbook -i inventories/kerberos.yml kerberos_server.yml
+ansible-playbook -i hosts.yml kerberos_server.yml
 
 ## run the cp-ansible
 cd /path/to/cp-ansible

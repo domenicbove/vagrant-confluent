@@ -12,8 +12,8 @@
       mode: 0755
 
 - hosts: zookeeper:kafka_broker:schema_registry:kafka_connect:ksql:control_center:kafka_rest
+  gather_facts: no
   tasks:
-
    - name: addprinc
      shell: "kadmin.local -q 'addprinc -randkey {{ item }}/{{ inventory_hostname }}@{{ kerberos.realm | upper }}'"
      delegate_to: "{{ groups['kerberos_server'][0] }}"
