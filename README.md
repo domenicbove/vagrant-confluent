@@ -35,7 +35,7 @@ ansible-playbook -i inventories/kerberos.yml kerberos_server.yml
 ## run the cp-ansible
 cd /path/to/cp-ansible
 
-ansible-playbook -i ../vagrant-confluent/inventories/<security_type>.yml all.yml
+ansible-playbook -i ../vagrant-confluent/hosts.yml all.yml -e security_mode=<plaintext, ssl, sasl_ssl, kerberos_ssl, kerberos>
 
 ## check services
 ansible -i ../vagrant-confluent/inventories/<security_type>.yml preflight -m shell -a "systemctl --all | grep confluent"
